@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}{{ blog.title }}{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+    <div id="Main" style=" margin-right: 50px; margin-left: 50px">
+
+        <div class="panel" style="padding: 0px 130px 0px 10px;">
+            <div class="header topic_header">
+                <div class="fr"><a href='{{ url_for('member.user',name=blog.author.username ) }}'>
+                    <img src='{{ blog.author.img_url }}' align="right"/></a>
+                </div>
+                <a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
+                <a href="/go/python">{{ blog.tag }}</a>
+
+                <h2>{{ blog.title }}</h2>
+                <div id="topic_434530_votes" class="votes">
+
+                </div> &nbsp;
+                <small class="gray-light" style="color: #95a5a6;">
+                    <a href="/member/qqq2333">{{ blog.author.username }}</a> · 58 分钟前 · 421 次点击 &nbsp; &nbsp;
+                               <a href='{{ url_for('my.add', blog=blog.id) }}'>
+                                   <button class="btn btn-info" style="font-size: 12px;padding: 1px 10px">收藏</button>
+                               </a>
+                    <a href="/append/topic/434530" class="op">APPEND</a>
+                </small>
+            </div>
+
+            <div class='inner topic'>
+                <div class='topic_content'>
+                    <div class="markdown-text">
+                        {{ blog.content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel">
+            <div class="header">
+            <span class='col_fade'>
+                {{ reply|count }} 回复<strong> |</strong> 直到 2018-03-05 13:05:28 +08:00
+            </span>
+                {% for r in reply %}
+                    <div class='cell reply_area reply_item'>
+                        <div class='author_content'>
+                            <img class="user_avatar" src='{{ r.author.img_url }}' width="38">
+                            <div class='user_info'>
+                                <a class='dark reply_author'>
+                                    {{ r.author.username }}
+                                </a>
+                                <a class="reply_time">
+                                    {{ loop.index }}楼 • 2 天前
+                                </a>
+                            </div>
+                            <div class='reply_content from-leiwei1991'>
+                                <div class="markdown-text">
+                                    {{ r.content }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="cell">
+                <div style="float: right"><a href="#" onclick="goTop()"><strong>↑</strong> 回到顶部</a></div>
+                <h4>添加一条新回复</h4>
+            </div>
+            <div class="cell">
+                <form method="post" action='{{ url_for('wen.blog',id=blog.id) }}'>
+                    <textarea class="form-control" rows="4" name="content" maxlength="1000" ></textarea>
+                    <div class="sep10"></div>
+                    <div class="fr">
+                        <div class="sep5"></div>
+                        <span style="float: right">请尽量让自己的回复能够对别人有帮助</span></div>
+                    <input type="hidden" value="95711" name="once"/>
+                    <input type="submit" value="回复" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

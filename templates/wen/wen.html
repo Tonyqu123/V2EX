@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ name }}{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    <div class="panel" style="margin: 30px">
+ <div class="node_header">
+     <div class="node_avatar">
+         <div style="float: left; display: inline-block; margin-right: 10px; margin-bottom: initial!important;">
+             <img src={{ tag.img_url }} , width="72" />
+         </div>
+     </div>
+</div>
+
+     <div class="node_info">
+         <div class="fr f12">
+             <span>主题总数</span>
+             <strong>count</strong>
+             <span class="snow">&nbsp;•&nbsp;</span>
+             <a href="/favorite/node/90?once=70258" class="node_header_link">加入收藏</a>
+        </div><a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span> {{ tag.name }}
+
+    <div class="sep10"></div>
+             <div class="sep5"></div>
+             <div class="fr" style="padding-left: 10px;"></div>
+        <span class="f12">{{ tag.info }}</span>
+
+        <div class="sep10"></div>
+    </div>
+ </div>
+    <div class="panel" style="margin: 30px"3>
+{#    {% for blog in blog_list %}#}
+{#    {{ blog.title }}<br>#}
+{#    {% endfor %}#}
+
+    {% for blog in blog_list %}
+                        <div class="cell">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tr>
+
+                                    <td width="38" valign="top" align="center">
+                                        <a href='{{ url_for('member.user', name=blog.author.username) }}'>
+                                            <img width="58" src='{{ blog.author.img_url }}'/></a></td>
+                                    <td width="10"></td>
+
+                                    <td width="auto" valign="middle">
+        <span class="item_title">
+            <h4><a href='{{ url_for('wen.blog', id=blog.id) }}'>{{ blog.title }}<br></a></h4>
+        </span>
+                                        <div class="sep5"></div>
+                                        <a class="node"
+                                           href='{{ url_for('wen.index', name=blog.tag) }}'>{{ blog.tag }}</a>
+                                        &nbsp;•&nbsp; <strong>
+                                        <a href='{{ url_for('member.user', name=blog.author.username) }}'>{{ blog.author.username }}</a></strong>
+                                        几秒前 最后回复来自 <strong><a href="/member/crz">crz</a></strong></span>
+                                    </td>
+
+                                    <td width="70" align="left" valign="left">
+                                        <span style="color: #2d6987">{{ reply_c }}个回复</span></a>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    {% endfor %}
+    </div>
+{% endblock %}

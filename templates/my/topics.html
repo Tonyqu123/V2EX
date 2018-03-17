@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}收藏{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+<div class="panel" style="margin: 20px 100px 20px 50px">
+        <div>
+            <img src={{ user.img_url }} , width="24" style="border-radius: 24px; margin-top: -2px;" border="0"/>
+            <a href={{ url_for('member.user', name=user.username) }}> {{ user.username }} 收藏的所有主题</a>
+        </div>
+        <div class="topic_list">
+            {% for collect in collect_list %}
+                <div class="cell">
+                    <div class="topic_title_wrapper">
+                        <td width="auto" valign="middle">
+                            <a class="topic_title" href='{{ url_for('wen.blog', id=collect.blog.id) }}'>
+                                <h4>{{ collect.blog.title }}</h4>
+                            </a>
+                            <div class="sep5"></div>
+                        </td>
+                        几个回复
+                    </div>
+                </div>
+            {% endfor %}
+                    </div>
+
+    </div>
+{% endblock %}

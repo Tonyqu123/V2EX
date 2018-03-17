@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <title>{% block title %}{% endblock %}仿 v2ex</title>
+    {% endblock %}
+    <meta charset="UTF-8">
+{#<link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">#}
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/lib/editor/editor.css">
+    <link rel="stylesheet" href="/static/lib/webuploader/webuploader.css">
+    <script src="/static/lib/jquery-3.0.0.min.js"></script>
+    <script src="/static/lib/markdownit.js"></script>
+    <script src="/static/lib/webuploader/webuploader.withoutimage.js"></script>
+    <script src="/static/lib/editor/editor.js"></script>
+    <script src="/static/lib/editor/ext.js"></script>
+</head>
+<body>
+
+    <div id="Top">
+            <div class="panel" style="padding: 0px 20px 0px 20px;">
+                <div style="padding-top: 6px;">
+                {% if session.get('user') %}
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td width="110" align="left"><a href="/" name="top" title="way to explore"><img src="//cdn.v2ex.com/site/logo@2x.png?m=1346064962" border="0" align="default" alt="V2EX" width="94" height="30" /></a></td>
+                        <td width="auto" align="left">
+                            <div id="Search"><form action="https://www.google.com" onsubmit="return dispatch()" target="_blank"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-repeat: no-repeat; display: inline-block;"></div></form></div>
+                        </td>
+                        <td width="570" align="right" style="padding-top: 2px;"><a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;
+                            <a href='{{ url_for('member.user', name=session.user) }}' class="top">{{ session.user }}</a>&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;
+                            <a href="/settings" class="top">设置</a>&nbsp;&nbsp;&nbsp;
+                            <a href='{{ url_for('member.logout') }}' onclick="if (confirm('确定要从 V2EX 登出？')) { location.href= '/signout?once=14451'; }" class="top">登出</a></td>
+                    </tr>
+                    </table>
+
+                {% else %}
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td width="110" align="left"><a href="/" name="top" title="way to explore"><img src="//cdn.v2ex.com/site/logo@2x.png?m=1346064962" border="0" align="default" alt="V2EX" width="94" height="30" /></a></td>
+                    <td width="auto" align="left">
+                        <div id="Search"><form action="https://www.google.com" onsubmit="return dispatch()" target="_blank"><div style="width: 276px; height: 28px; background-size: 276px 28px; background-repeat: no-repeat; display: inline-block;"><input type="text" maxlength="40" name="q" id="q" value="" /></div></form></div>
+                    </td>
+                    <td width="570" align="right" style="padding-top: 2px;"><a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;
+                        <a href= '{{ url_for('member.register') }}' >注册</a>&nbsp;&nbsp;&nbsp;
+                        <a href='{{ url_for('member.login') }}'>登录</a></td>
+                </tr>
+            </table>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+    {% block body %}
+{% endblock %}
+</body>
+</html>
